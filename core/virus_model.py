@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from .base_model import BaseModel
 from .knn import KNNModel
 from .decision_tree import DecisionTreeModel
@@ -23,7 +24,20 @@ class VirusDiag(BaseModel):
     def get_model(self):
         return self.model
 
-class VirusModelBuilder:
+class IVirusModelBuilder(ABC):
+    @abstractmethod
+    def set_model_type(self, model_type):
+        pass
+
+    @abstractmethod
+    def set_hyperparameters(self, **kwargs):
+        pass
+
+    @abstractmethod
+    def build(self):
+        pass
+
+class VirusModelBuilder(IVirusModelBuilder):
     def __init__(self):
         self.model_type = None
         self.start_hyperparameters = {}

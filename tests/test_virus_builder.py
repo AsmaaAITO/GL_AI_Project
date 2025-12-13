@@ -6,7 +6,7 @@ import numpy as np
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from core.virus_model import VirusModelBuilder, VirusDiag
+from core.virus_model import VirusModelBuilder, VirusDiag, IVirusModelBuilder
 from core.knn import KNNModel
 from core.decision_tree import DecisionTreeModel
 from pipeline.trainer import Trainer
@@ -14,6 +14,10 @@ from pipeline.trainer import Trainer
 def test_virus_builder_knn():
     """Test that VirusModelBuilder can build a KNN model."""
     builder = VirusModelBuilder()
+    
+    # Verify interface implementation
+    assert isinstance(builder, IVirusModelBuilder)
+    
     builder.set_model_type('knn')
     builder.set_hyperparameters(n_neighbors=3)
     

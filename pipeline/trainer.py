@@ -3,6 +3,7 @@ import joblib
 import numpy as np
 from datetime import datetime
 from core.base_model import BaseModel
+from core.virus_model import IVirusModelBuilder
 
 
 class Trainer:
