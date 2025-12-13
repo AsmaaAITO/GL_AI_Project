@@ -3,6 +3,7 @@ import joblib
 import numpy as np
 from datetime import datetime
 from core.base_model import BaseModel
+from core.virus_model import IVirusModelBuilder
 
 
 class Trainer:
@@ -48,6 +49,14 @@ class Trainer:
             model_path = self.save_model(model, model_name)
         
         return model, model_path
+    
+    def train_with_builder(self, builder, X, y, model_name=None, save_model=True):
+        """
+        Builds a model using the provided builder and then trains it.
+        """
+        print(f"\nBuilding model with {builder.__class__.__name__}...")
+        model = builder.build()
+        return self.train(model, X, y, model_name=model_name, save_model=save_model)
     
     def save_model(self, model, model_name):
         if not model.is_fitted:
